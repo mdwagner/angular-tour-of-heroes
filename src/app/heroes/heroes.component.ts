@@ -26,7 +26,7 @@ export class HeroesComponent implements OnInit {
     this.messageService.add(`HeroesComponent: Selected hero id${hero.id}`);
   }
 
-  async getHeroes(): void {
+  async getHeroes() {
     this.heroes = await this.heroService.getHeroes();
   }
 }
