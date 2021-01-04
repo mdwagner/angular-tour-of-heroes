@@ -11,6 +11,7 @@ import { Hero } from '../hero';
 })
 export class HeroDetailComponent implements OnInit {
   hero: Hero;
+
   constructor(
     private route: ActivatedRoute,
     private heroService: HeroService,
@@ -28,5 +29,9 @@ export class HeroDetailComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  save() {
+    this.heroService.updateHero(this.hero).then(() => this.goBack());
   }
 }
