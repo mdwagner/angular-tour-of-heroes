@@ -1,4 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { HeroService } from '../hero.service';
 import { Hero } from '../hero';
 
 @Component({
@@ -7,9 +10,23 @@ import { Hero } from '../hero';
   styleUrls: ['./hero-detail.component.css'],
 })
 export class HeroDetailComponent implements OnInit {
-  @Input() hero: Hero;
+  hero: Hero;
+  constructor(
+    private route: ActivatedRoute,
+    private heroService: HeroService,
+    private location: Location
+  ) {}
 
-  constructor() {}
+  ngOnInit(): void {
+    this.getHero();
+  }
 
-  ngOnInit(): void {}
+  async getHero() {
+    const id = parseInt(this.route.snapshot.paramMap.get('id'));
+    this.hero = await this.heroService.getHero(id);
+  }
+
+  goBack() {
+    this.location.back();
+  }
 }

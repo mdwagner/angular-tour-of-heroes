@@ -14,4 +14,11 @@ export class HeroService {
     this.messageService.add('HeroService: fetched heroes');
     return Promise.resolve(HEROES);
   }
+
+  getHero(id: number): Promise<Hero> {
+    // TODO: send the message _after_ fetching the hero
+    this.messageService.add(`HeroService: fetched hero id=${id}`);
+    const foundHero = HEROES.find((hero) => hero.id === id);
+    return Promise.resolve(foundHero);
+  }
 }
